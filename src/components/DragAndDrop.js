@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 class DragAndDrop extends Component {
     state={
-        drag: false
+        dragging: false
     }
 
     dropRef=React.createRef()
@@ -17,7 +17,7 @@ class DragAndDrop extends Component {
         e.stopPropagation()
         this.dragCounter++
         if (e.dataTransfer.items && e.dataTransfer.items.length > 0) {
-            this.setState({drag: true})
+            this.setState({dragging: true})
         }
     }
 
@@ -26,13 +26,13 @@ class DragAndDrop extends Component {
         e.stopPropagation()
         this.dragCounter--
         if (this.dragCounter === 0) return
-        this.setState({drag: false})
+        this.setState({dragging: false})
     }
 
     handleDrop= (e) => {
         e.preventDefault()
         e.stopPropagation()
-        this.setState({drag: false})
+        this.setState({dragging: false})
         if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
             this.props.handleDrop(e.dataTransfer.files)
             e.dataTransfer.clearData()
